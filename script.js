@@ -12,12 +12,12 @@ const PRODUCTS = [
     description:
       "Los Airpods Pro 2da Gen son auriculares inalámbricos con cancelación activa de ruido, resistencia al agua IPX4 y hasta 6 horas de reproducción.",
     images: [
-      "./images/products/Air pods Pro 2da Gen/Airpods Pro 2daGen (1).png",
-      "./images/products/Air pods Pro 2da Gen/Airpods Pro 2daGen (6).png",
-      "./images/products/Air pods Pro 2da Gen/Airpods Pro 2daGen (5).png",
-      "./images/products/Air pods Pro 2da Gen/Airpods Pro 2daGen (4).png",
-      "./images/products/Air pods Pro 2da Gen/Airpods Pro 2daGen (3).png",
-      "./images/products/Air pods Pro 2da Gen/Airpods Pro 2daGen (2).png",
+      "./images/products/Air Pods Pro 2da Gen/Airpods Pro 2daGen (1).png",
+      "./images/products/Air Pods Pro 2da Gen/Airpods Pro 2daGen (6).png",
+      "./images/products/Air Pods Pro 2da Gen/Airpods Pro 2daGen (5).png",
+      "./images/products/Air Pods Pro 2da Gen/Airpods Pro 2daGen (4).png",
+      "./images/products/Air Pods Pro 2da Gen/Airpods Pro 2daGen (3).png",
+      "./images/products/Air Pods Pro 2da Gen/Airpods Pro 2daGen (2).png",
     ],
     specs: {
       Driver: "10mm Dinámico",
@@ -224,3 +224,4 @@ function renderCatalog() {
 }
 
 document.addEventListener("DOMContentLoaded", renderCatalog);
+
