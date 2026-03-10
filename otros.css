@@ -1,0 +1,53 @@
+/* Estilos para Páginas Legales */
+.legal-content {
+    padding: 100px 0;
+    line-height: 1.8;
+}
+
+.container-narrow {
+    max-width: 800px; /* Ancho optimizado para lectura */
+    margin: 0 auto;
+    padding: 0 25px;
+}
+
+.legal-content h1 {
+    font-family: var(--font-heading);
+    font-size: 3.5rem;
+    margin-bottom: 10px;
+    letter-spacing: -2px;
+}
+
+.last-update {
+    color: var(--gray-400);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    margin-bottom: 60px;
+    display: block;
+}
+
+.legal-section {
+    margin-bottom: 50px;
+}
+
+.legal-section h2 {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: var(--black);
+}
+
+.legal-section p, .legal-section li {
+    color: var(--gray-600);
+    margin-bottom: 15px;
+}
+
+.legal-section ul {
+    padding-left: 20px;
+    margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+    .legal-content h1 {
+        font-size: 2.5rem;
+    }
+}

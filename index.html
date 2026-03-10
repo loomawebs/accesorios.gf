@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accesorios G&F | Audio Boutique & Engineering</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&family=Space+Mono&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="announcement-bar">
+        <span>SHOWROOM EXCLUSIVO EN SAN JUAN, AR — PRUEBAS DE SONIDO DISPONIBLES</span>
+    </div>
+
+    <header class="site-header">
+        <div class="container nav-container">
+            <div class="header-left">
+                <nav class="nav-links">
+                    <a href="#showroom" class="nav-item">Colección</a>
+                    <a href="#engineering" class="nav-item">Ingeniería</a>
+                </nav>
+            </div>
+            <div class="header-center">
+                <a href="#" class="main-logo">Accesorios G&F<span>.</span></a>
+            </div>
+            <div class="header-right">
+                <a href="https://wa.me/5492645643805" class="contact-trigger">CONSULTAR ASESOR</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero-split">
+            <div class="container grid-2">
+                <div class="hero-info">
+                    <span class="eyebrow">ESTÁNDAR AUDIÓFILO</span>
+                    <h1>Transparencia sonora sin precedentes.</h1>
+                    <p>Curamos accesorios de audio que no colorean el sonido. Escuchá la pureza técnica en cada detalle.</p>
+                    <div class="hero-actions">
+                        <a href="#showroom" class="btn-primary">EXPLORAR CATÁLOGO</a>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="hero-image-card">
+                        <img src="https://www.artifactargentina.com/cdn/shop/files/AirPods_Pro_2da_gen_con_MagSafe_USB-C.gif?v=1751315054&width=2048" alt="Audio Detail">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="showroom" id="showroom">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Catálogo Técnico</h2>
+                    <p>Seleccioná un modelo para examinar ángulos y especificaciones.</p>
+                </div>
+                
+                <div class="catalog-grid" id="catalog-root"></div>
+            </div>
+        </section>
+
+        <section class="engineering" id="engineering">
+            <div class="container">
+                <div class="eng-card">
+                    <div class="eng-text">
+                        <span class="eyebrow">MATERIALES</span>
+                        <h3>Diafragmas de Berilio Puro.</h3>
+                        <p>A diferencia del aluminio o el plástico, el berilio ofrece una rigidez 7 veces mayor, eliminando cualquier distorsión armónica en frecuencias altas.</p>
+                    </div>
+                    <div class="eng-visual">
+                        <img src="https://i.blogs.es/f6ba19/apple_airpods-max_internals_12082020_big.jpg.large_2x/450_1000.jpg" alt="Material Science">
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div class="product-viewer" id="productViewer">
+        <div class="viewer-overlay" onclick="viewer.close()"></div>
+        <div class="viewer-content">
+            <button class="close-viewer" onclick="viewer.close()"><i data-lucide="x"></i></button>
+            
+            <div class="viewer-grid">
+                <div class="viewer-gallery">
+                    <div class="main-display">
+                        <img id="activeImg" src="" alt="Vista Principal">
+                    </div>
+                    <div class="thumbnail-strip" id="thumbStrip">
+                        </div>
+                </div>
+
+                <div class="viewer-info">
+                    <nav class="breadcrumb">Accesorios G&F / <span id="v-cat"></span></nav>
+                    <h2 id="v-title">Cargando...</h2>
+                    
+                    <div class="v-price-row">
+                        <span id="v-price" class="v-price"></span>
+                        <span id="v-stock-badge" class="stock-badge"></span>
+                    </div>
+                    
+                    <div class="v-description">
+                        <p id="v-desc"></p>
+                    </div>
+
+                    <div class="v-specs-box">
+                        <div class="spec-header" onclick="viewer.toggleSpecs()">
+                            <span>ESPECIFICACIONES TÉCNICAS</span>
+                            <i data-lucide="plus" id="specIcon"></i>
+                        </div>
+                        <div class="spec-content active" id="specContent">
+                            </div>
+                    </div>
+
+                    <div id="v-actions-container">
+                        <a href="#" id="v-whatsapp-btn" class="whatsapp-btn">
+                            <i data-lucide="message-circle"></i> 
+                            <span id="v-btn-text">CONSULTAR POR WHATSAPP</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-logo-area">
+                    <div class="logo">Accesorios G&F<span>.</span></div>
+                    <p>2026 Accesorios G&F. Todos los derechos reservados.</p>
+                </div>
+                <div class="footer-nav">
+                    <h4>MAPA</h4>
+                    <a href="#hero">Inicio</a>
+                    <a href="#showroom">Showroom</a>
+                    <a href="#engineering">Ingeniería</a>
+                </div>
+                <div class="footer-nav">
+                    <h4>LEGAL</h4>
+                    <a href="privacidad.html">Privacidad</a>
+                    <a href="terminos.html">Términos</a>
+                    <a href="envios.html">Envíos</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Inicializa los iconos después de que el DOM cargue
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+        });
+    </script>
+</body>
+</html>
