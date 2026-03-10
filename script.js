@@ -18,6 +18,7 @@ const PRODUCTS = [
       "./images/products/Air Pods Pro 2da Gen/product(4).png",
       "./images/products/Air Pods Pro 2da Gen/product(5).png",
       "./images/products/Air Pods Pro 2da Gen/product(6).png",
+      "./images/products/Air Pods Pro 2da Gen/product(7).png"
     ],
     specs: {
       Driver: "10mm Dinámico",
@@ -44,7 +45,7 @@ const PRODUCTS = [
       "./images/products/Air Pro Buds 2da Gen/Air Pro 2da Gen (5).jpeg",
       "./images/products/Air Pro Buds 2da Gen/Air Pro 2da Gen (4).jpeg",
       "./images/products/Air Pro Buds 2da Gen/Air Pro 2da Gen (3).jpeg",
-      "./images/products/Air Pro Buds 2da Gen/Air Pro 2da Gen (2).jpeg",
+      "./images/products/Air Pro Buds 2da Gen/Air Pro 2da Gen (2).jpeg"
     ],
     specs: {
       Drivers: "40mm Dinámico",
@@ -74,7 +75,7 @@ const PRODUCTS = [
       "./images/products/TWS 300/TWS 300 (5).jpeg",
       "./images/products/TWS 300/TWS 300 (4).jpeg",
       "./images/products/TWS 300/TWS 300 (3).jpeg",
-      "./images/products/TWS 300/TWS 300 (2).jpeg",
+      "./images/products/TWS 300/TWS 300 (2).jpeg"
     ],
     specs: {
       Conexión: "Bluetooth 5.2",
@@ -224,3 +225,4 @@ function renderCatalog() {
 }
 
 document.addEventListener("DOMContentLoaded", renderCatalog);
+
