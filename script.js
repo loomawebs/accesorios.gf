@@ -6,8 +6,8 @@ const PRODUCTS = [
     id: "p1",
     title: "Airpods Pro 2da Gen",
     cat: "TRUE WIRELESS",
-    price: 29990, // Precio actual
-    oldPrice: 59990, // Número para cálculos o formato
+    price: 59990, // Precio actual
+    oldPrice: 69990, // Número para cálculos o formato
     inStock: true,
     description:
       "Los Airpods Pro 2da Gen son auriculares inalámbricos con cancelación activa de ruido, resistencia al agua IPX4 y hasta 6 horas de reproducción.",
