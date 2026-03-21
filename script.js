@@ -9,6 +9,7 @@ const PRODUCTS = [
     price: 59990, // Precio actual
     oldPrice: 69990, // Número para cálculos o formato
     inStock: true,
+    video: "./airpods.mp4", // Video de producto (opcional)
     description:
       "Los Airpods Pro 2da Gen son auriculares inalámbricos con cancelación activa de ruido, resistencia al agua IPX4 y hasta 6 horas de reproducción.",
     images: [
@@ -18,7 +19,7 @@ const PRODUCTS = [
       "./images/products/Air Pods Pro 2da Gen/product(4).png",
       "./images/products/Air Pods Pro 2da Gen/product(5).png",
       "./images/products/Air Pods Pro 2da Gen/product(6).png",
-      "./images/products/Air Pods Pro 2da Gen/product(7).png"
+      "./images/products/Air Pods Pro 2da Gen/product(7).png",
     ],
     specs: {
       Driver: "10mm Dinámico",
@@ -33,6 +34,7 @@ const PRODUCTS = [
     title: "Air Pro Buds 2da Gen",
     cat: "REFERENCE MONITOR",
     price: 24990,
+    oldPrice: 29990,
     inStock: false, // PRODUCTO AGOTADO
     description:
       "Los Air Pro Buds 2da Gen son auriculares de referencia con un driver de 40mm y una construcción de aluminio y cuero.",
@@ -45,7 +47,7 @@ const PRODUCTS = [
       "./images/products/Air Pro Buds 2da Gen/Air Pro 2da Gen (5).jpeg",
       "./images/products/Air Pro Buds 2da Gen/Air Pro 2da Gen (4).jpeg",
       "./images/products/Air Pro Buds 2da Gen/Air Pro 2da Gen (3).jpeg",
-      "./images/products/Air Pro Buds 2da Gen/Air Pro 2da Gen (2).jpeg"
+      "./images/products/Air Pro Buds 2da Gen/Air Pro 2da Gen (2).jpeg",
     ],
     specs: {
       Drivers: "40mm Dinámico",
@@ -60,6 +62,7 @@ const PRODUCTS = [
     title: "TWS 300",
     cat: "REFERENCE MONITOR",
     price: 19990,
+    oldPrice: 24990,
     inStock: false,
     description:
       "Los TWS 300 son auriculares true wireless con Bluetooth 5.2, latencia ultra baja de 40ms y batería de hasta 8 horas.",
@@ -75,7 +78,7 @@ const PRODUCTS = [
       "./images/products/TWS 300/TWS 300 (5).jpeg",
       "./images/products/TWS 300/TWS 300 (4).jpeg",
       "./images/products/TWS 300/TWS 300 (3).jpeg",
-      "./images/products/TWS 300/TWS 300 (2).jpeg"
+      "./images/products/TWS 300/TWS 300 (2).jpeg",
     ],
     specs: {
       Conexión: "Bluetooth 5.2",
@@ -88,125 +91,125 @@ const PRODUCTS = [
 ];
 
 const viewer = {
-  modal: document.getElementById("productViewer"),
-  activeProd: null,
+    modal: document.getElementById("productViewer"),
+    activeProd: null,
 
-  formatCurrency(num) {
-    if (!num) return "";
-    const truncated = Math.trunc(num * 100) / 100;
-    return new Intl.NumberFormat("es-AR", {
-      style: "currency",
-      currency: "ARS",
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2,
-    }).format(truncated);
-  },
+    formatCurrency(num) {
+        if (!num) return "";
+        return new Intl.NumberFormat("es-AR", {
+            style: "currency",
+            currency: "ARS",
+        }).format(Math.trunc(num));
+    },
 
-  open(id) {
-    this.activeProd = PRODUCTS.find((p) => p.id === id);
+    open(id) {
+        this.activeProd = PRODUCTS.find((p) => p.id === id);
 
-    document.getElementById("v-title").innerText = this.activeProd.title;
-    document.getElementById("v-cat").innerText = this.activeProd.cat;
-    document.getElementById("v-desc").innerText = this.activeProd.description;
+        // Textos básicos
+        document.getElementById("v-title").innerText = this.activeProd.title;
+        document.getElementById("v-cat").innerText = this.activeProd.cat;
+        document.getElementById("v-desc").innerText = this.activeProd.description;
 
-    // Manejo de Precio con Descuento en el Modal
-    const priceEl = document.getElementById("v-price");
-    let priceHTML = ``;
+        // Precios y Stock
+        const priceEl = document.getElementById("v-price");
+        const badgeEl = document.getElementById("v-stock-badge");
+        const btnEl = document.getElementById("v-whatsapp-btn");
+        const btnText = document.getElementById("v-btn-text");
 
-    if (this.activeProd.oldPrice) {
-      priceHTML += `<span class="old-price">${this.formatCurrency(this.activeProd.oldPrice)}</span> `;
-    }
-    priceHTML += `<span class="current-price">${this.formatCurrency(this.activeProd.price)}</span>`;
-    priceEl.innerHTML = priceHTML;
+        priceEl.innerHTML = this.activeProd.oldPrice 
+            ? `<span class="old-price">${this.formatCurrency(this.activeProd.oldPrice)}</span> ${this.formatCurrency(this.activeProd.price)}`
+            : this.formatCurrency(this.activeProd.price);
 
-    // 2. Precio y Stock
-    const badgeEl = document.getElementById("v-stock-badge");
-    const btnEl = document.getElementById("v-whatsapp-btn");
-    const btnText = document.getElementById("v-btn-text");
+        if (this.activeProd.inStock) {
+            badgeEl.innerText = "STOCK DISPONIBLE";
+            badgeEl.className = "stock-badge in-stock";
+            btnEl.classList.remove("disabled");
+            btnText.innerText = "CONSULTAR POR WHATSAPP";
+            btnEl.href = `https://wa.me/5492645643805?text=Hola! Me interesa el producto: ${this.activeProd.title}`;
+        } else {
+            badgeEl.innerText = "PRODUCTO AGOTADO";
+            badgeEl.className = "stock-badge out-of-stock";
+            btnEl.classList.add("disabled");
+            btnText.innerText = "SIN STOCK TEMPORALMENTE";
+        }
 
-    priceEl.innerText = this.formatCurrency(this.activeProd.price);
+        // --- GESTIÓN DE GALERÍA (Imágenes + Video) ---
+        const thumbStrip = document.getElementById("thumbStrip");
+        
+        // 1. Mostrar la primera imagen por defecto
+        this.changeMedia(this.activeProd.images[0], 'image');
 
-    if (this.activeProd.inStock) {
-      badgeEl.innerText = "STOCK DISPONIBLE";
-      badgeEl.className = "stock-badge in-stock";
-      btnEl.classList.remove("disabled");
-      btnText.innerText = "CONSULTAR POR WHATSAPP";
-
-      // Configuración para abrir en pestaña nueva
-      btnEl.href = `https://wa.me/5492645643805?text=Hola! Me interesa el producto: ${this.activeProd.title}`;
-      btnEl.target = "_blank";
-      btnEl.rel = "noopener noreferrer";
-    } else {
-      badgeEl.innerText = "PRODUCTO AGOTADO";
-      badgeEl.className = "stock-badge out-of-stock";
-      btnEl.classList.add("disabled");
-      btnText.innerText = "SIN STOCK TEMPORALMENTE";
-      btnEl.href = "#";
-
-      // Opcional: resetear el target si está agotado
-      btnEl.removeAttribute("target");
-    }
-    // 3. Galería de Imágenes
-    const mainImg = document.getElementById("activeImg");
-    mainImg.src = this.activeProd.images[0];
-
-    const thumbStrip = document.getElementById("thumbStrip");
-    thumbStrip.innerHTML = this.activeProd.images
-      .map(
-        (img, index) => `
-            <div class="thumb ${index === 0 ? "active" : ""}" onclick="viewer.changeImg('${img}', this)">
+        // 2. Generar miniaturas de imágenes
+        let thumbsHTML = this.activeProd.images.map((img, index) => `
+            <div class="thumb ${index === 0 ? "active" : ""}" onclick="viewer.changeMedia('${img}', 'image', this)">
                 <img src="${img}" alt="Vista ${index + 1}">
             </div>
-        `,
-      )
-      .join("");
+        `).join("");
 
-    // 4. Specs
-    const specContent = document.getElementById("specContent");
-    specContent.innerHTML = Object.entries(this.activeProd.specs)
-      .map(
-        ([key, value]) => `
-            <div class="spec-line">
-                <span>${key}</span>
-                <strong>${value}</strong>
-            </div>
-        `,
-      )
-      .join("");
+        // 3. Agregar miniatura de video si existe
+        if (this.activeProd.video) {
+            thumbsHTML += `
+                <div class="thumb thumb-video" onclick="viewer.changeMedia('${this.activeProd.video}', 'video', this)">
+                    <div class="video-overlay"><i data-lucide="play"></i></div>
+                    <video src="${this.activeProd.video}" muted></video>
+                </div>
+            `;
+        }
+        thumbStrip.innerHTML = thumbsHTML;
 
-    this.modal.classList.add("active");
-    document.body.style.overflow = "hidden";
-    lucide.createIcons();
-  },
+        // Specs
+        const specContent = document.getElementById("specContent");
+        specContent.innerHTML = Object.entries(this.activeProd.specs)
+            .map(([key, value]) => `<div class="spec-line"><span>${key}</span><strong>${value}</strong></div>`)
+            .join("");
 
-  close() {
-    this.modal.classList.remove("active");
-    document.body.style.overflow = "auto";
-  },
+        this.modal.classList.add("active");
+        document.body.style.overflow = "hidden";
+        lucide.createIcons();
+    },
 
-  changeImg(src, thumbEl) {
-    document.getElementById("activeImg").src = src;
-    document
-      .querySelectorAll(".thumb")
-      .forEach((t) => t.classList.remove("active"));
-    thumbEl.classList.add("active");
-  },
+    // FUNCIÓN CLAVE: Cambia entre Video e Imagen
+    changeMedia(src, type, thumbEl) {
+        const display = document.querySelector(".main-display");
+        
+        if (type === 'video') {
+            display.innerHTML = `<video src="${src}" controls autoplay loop class="fade-in"></video>`;
+        } else {
+            display.innerHTML = `<img src="${src}" alt="Producto" class="fade-in">`;
+        }
 
-  toggleSpecs() {
-    const content = document.getElementById("specContent");
-    content.classList.toggle("active");
-  },
+        if (thumbEl) {
+            document.querySelectorAll(".thumb").forEach((t) => t.classList.remove("active"));
+            thumbEl.classList.add("active");
+        }
+    },
+
+    close() {
+        this.modal.classList.remove("active");
+        document.body.style.overflow = "auto";
+        // Limpiamos el display para que el video deje de sonar/reproducirse
+        document.querySelector(".main-display").innerHTML = "";
+    },
+
+    toggleSpecs() {
+        document.getElementById("specContent").classList.toggle("active");
+        const icon = document.getElementById("specIcon");
+        // Cambiar icono de plus a minus (opcional)
+    }
 };
 
+// Renderizado inicial (igual al tuyo)
 function renderCatalog() {
-  const root = document.getElementById("catalog-root");
-  root.innerHTML = PRODUCTS.map((p) => {
-    // Lógica de precio para la tarjeta
-    const priceDisplay = p.oldPrice
-      ? `<span class="old-price">${viewer.formatCurrency(p.oldPrice)}</span> ${viewer.formatCurrency(p.price)}`
-      : viewer.formatCurrency(p.price);
+    const root = document.getElementById("catalog-root");
+    if(!root) return;
 
-    return `
+    root.innerHTML = PRODUCTS.map((p) => {
+        // Lógica para el display de precios (Normal vs Oferta)
+        const priceHTML = p.oldPrice && p.inStock
+            ? `<span class="old-price">${viewer.formatCurrency(p.oldPrice)}</span> ${viewer.formatCurrency(p.price)}`
+            : viewer.formatCurrency(p.price);
+
+        return `
             <div class="product-card ${!p.inStock ? "card-out-of-stock" : ""}" onclick="viewer.open('${p.id}')">
                 <div class="p-media">
                     <img src="${p.images[0]}" alt="${p.title}">
@@ -216,13 +219,12 @@ function renderCatalog() {
                 <div class="p-meta">
                     <span class="p-cat">${p.cat}</span>
                     <h3 class="p-title">${p.title}</h3>
-                    <p class="p-price">${priceDisplay}</p>
+                    <p class="p-price">${priceHTML}</p>
                 </div>
             </div>
         `;
-  }).join("");
-  lucide.createIcons();
+    }).join("");
+    
+    lucide.createIcons();
 }
-
 document.addEventListener("DOMContentLoaded", renderCatalog);
-

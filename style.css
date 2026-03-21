@@ -298,7 +298,6 @@ body {
 
 .thumbnail-strip {
   display: flex;
-  justify-content: center;
   flex-wrap: wrap;
   gap: 15px;
   margin-top: 40px;
@@ -1082,3 +1081,49 @@ body {
     }
 }
 
+/* Asegura que el contenido multimedia llene su contenedor */
+.main-display video, 
+.main-display img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Evita que se deforme */
+    display: block;
+}
+
+/* Estilo para la miniatura de video */
+.thumb-video {
+    position: relative;
+    background: #000;
+}
+
+.thumb-video video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.6;
+}
+
+.video-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.video-overlay i {
+    width: 18px;
+    height: 18px;
+}
+
+/* Animación de entrada suave */
+.fade-in {
+    animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
